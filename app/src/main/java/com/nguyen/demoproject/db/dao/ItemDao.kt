@@ -12,7 +12,7 @@ interface ItemDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertManyItems(items: List<ItemCacheEntity>)
 
-    @Query("SELECT * FROM items")
+    @Query("SELECT * FROM items WHERE name IS NOT NULL AND name != '' ORDER BY list_id")
     suspend fun getItems(): List<ItemCacheEntity>
 
 }

@@ -5,7 +5,7 @@ import retrofit2.http.GET
 
 interface HiringService {
 
-    @GET("/DemoProject")
+    @GET("/hiring.json")
     suspend fun getItems(): List<Item>
 
 }

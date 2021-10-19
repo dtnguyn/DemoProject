@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.nguyen.demoproject.R
+import com.nguyen.demoproject.databinding.FragmentListBinding
 import com.nguyen.demoproject.utils.UIState
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,18 +23,18 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_list, container, false)
+        val binding = FragmentListBinding.inflate(inflater, container, false)
 
-        subscribeObservers()
+        subscribeObservers(binding)
 
         viewModel.getItems()
 
-        return view
+        return binding.root
     }
 
-    private fun subscribeObservers(){
-        viewModel.itemsUIState.observe(viewLifecycleOwner, {
-            when(it){
+    private fun subscribeObservers(binding: FragmentListBinding){
+        viewModel.itemsUIState.observe(viewLifecycleOwner, {state ->
+            when(state){
                 is UIState.Initial -> {
 
                 }
@@ -43,7 +45,14 @@ class ListFragment : Fragment() {
 
                 }
                 is UIState.Loaded -> {
-                    Log.d("ListFragment", "items: ${it.value}")
+                    state.value?.let{
+                        Log.d("ListFragment", "items: $it")
+
+                        val recyclerview = binding.listRecyclerview
+                        recyclerview.adapter = ListRecycleViewAdapter(it)
+                        recyclerview.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                    }
+
                 }
 
             }
