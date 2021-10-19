@@ -6,10 +6,12 @@ import com.nguyen.demoproject.db.mapper.ItemMapper
 import com.nguyen.demoproject.model.Item
 import com.nguyen.demoproject.utils.UIState
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class HiringRepository(
-    val api: HiringService,
-    val db: DemoDatabase
+class HiringRepository
+@Inject constructor(
+    private val api: HiringService,
+    private val db: DemoDatabase
 ) {
 
     suspend fun getItems(): Flow<UIState<List<Item>>>{

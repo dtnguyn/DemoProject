@@ -1,15 +1,14 @@
 package com.nguyen.demoproject.ui
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.fragment.app.viewModels
 import com.nguyen.demoproject.R
-import com.nguyen.demoproject.databinding.ActivityMainBinding
+import com.nguyen.demoproject.ui.list.ListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
