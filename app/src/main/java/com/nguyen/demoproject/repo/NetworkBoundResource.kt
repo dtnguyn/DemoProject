@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 inline fun <DomainType> getNetworkBoundResource(
-    crossinline query: () -> DomainType,
+    crossinline query: suspend () -> DomainType,
     crossinline fetch: suspend () -> DomainType?,
     crossinline saveFetchResult: suspend (DomainType?) -> Unit,
     crossinline shouldFetch: (DomainType?) -> Boolean = { true },
