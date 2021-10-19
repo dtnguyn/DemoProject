@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nguyen.demoproject.R
@@ -42,7 +43,7 @@ class ListFragment : Fragment() {
 
                 }
                 is UIState.Error -> {
-
+                    Toast.makeText(requireContext(), "Error: ${state.errorMsg}", Toast.LENGTH_SHORT).show()
                 }
                 is UIState.Loaded -> {
                     state.value?.let{
